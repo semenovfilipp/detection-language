@@ -3,8 +3,8 @@
 ROOT=$(dirname $0)
 cd "$ROOT"
 
-DOCKER_USERNAME="ФЫВФЫВ"
-DOCKER_PASSWORD="asdasdasd"
+DOCKER_USERNAME="имя_из_docker_hub"
+DOCKER_PASSWORD="пароль_имя_из_docker_hub"
 
 docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 
