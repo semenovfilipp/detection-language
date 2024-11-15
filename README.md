@@ -1,11 +1,35 @@
-Detect Language API Python Client
+Сервис по детекции языка
 ========
 
+### Описание
+Сервис для определения языка текста с использованием библиотеки detectlanguage.
+Проект использует API для отправления запросов в detectlanguage.com и получения ответа.
 
+Пример запроса по API detectionlanguage.com:
+```
+detectlanguage.detect("Привет, как дела")
+```
 
-Сервис по определению языка на основе текста
+Привет ответа по API от detectionlanguage.com:
+```commandline
+[{'isReliable': True, 'confidence': 12.04, 'language': 'ru'}]
+```
+
+### Порядок работы нашего проекта
+1. Запрос из Caila отправится в наш сервис на Python
+2. Наш сервис на Python отправит запрос в detectlanguage.com
+3. Наш сервис на Python получит ответ от detectlanguage.com
+4. Наш сервис на Python отправит ответ в Caila
+
+![0.png](docs/0.png)
+
 
 ## Пререквесты
+1. Linux|MacOS|Windows(WSL)
+2. Среда разработки (PyCharm|VSCode)
+3. Docker
+4. Аккаунт в Docker Hub
+5. Аккаунт в caila.io
 
 
 Перед использованием клиента API для определения языка необходимо настроить личный ключ API.
@@ -52,6 +76,102 @@ _____
   ]
 }
 ```
+____
+## Запуск кода на Windows через WSL
+
+1. Заходим в WSL
+
+2. Переходим в целевую папку, копируем туда репозиторий проекта detect-language
+
+```commandline
+https://github.com/detectlanguage/detectlanguage-python
+```
+```
+
+3. Проверяем питон:
+
+```
+python3 --version
+```
+
+4. Если версия 3.11 и выше, нужно поставить версию 3.10:
+```commandline
+sudo apt update
+   sudo apt install software-properties-common
+   sudo add-apt-repository ppa:deadsnakes/ppa
+   sudo apt update
+   sudo apt install python3.10
+```
+   
+(примечание: команда sudo позволяет вызывать команды от лица администратора, при первом вызове sudo система попросит ввести пароль от ubuntu (создавался на шаге wsl --install -d Ubuntu))
+
+5. Ставим версию 3.10 версией по дефолту
+```commandline
+   sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
+```
+
+
+6. Устанавливаем pip для установки зависимостей
+```commandline
+   sudo apt install python3-pip
+```
+
+7. Если apt не работает:
+```commandline
+ sudo apt install --reinstall python3-apt
+   sudo apt install --reinstall apt
+   sudo apt update
+
+``` 
+8. Устанавливаем distutils и setuptools (если они не скачиваются из requirements.txt)
+
+```commandline
+ sudo apt install python3.10 python3.10-venv python3.10-distutils
+   python3 -m pip install --upgrade setuptools
+
+```
+  
+9. Создаем виртуальное окружение
+```
+python3.10 -m venv myenv
+```
+   
+
+10. Активируем виртуальное окружение
+```
+source myenv/bin/activate
+```
+    
+
+11. Устанавливаем зависимости
+```commandline
+pip install --no-cache-dir -r requirements.txt
+```
+    
+
+12. Запускаем программу (одной командой):
+Указанные env перменные нужно будет заменить на свои
+```
+MLP_ACCOUNT_ID=1000147788 \
+    MLP_MODEL_ID=99013 \
+    MLP_INSTANCE_ID=35928 \
+    MLP_MODEL_NAME=caila-course \
+    HOSTNAME=$(hostname) \
+    MLP_SERVICE_TOKEN=1000147788.99013.lnasdlnkasdkjasdkasadkjasnadk \
+    MLP_REST_URL=https://caila.io \
+    MLP_GRPC_HOST=gate.caila.io:443 \
+    MLP_GRPC_HOSTS=0.gate.caila.io:443,1.gate.caila.io:443,2.gate.caila.io:443,3.gate.caila.io:443,4.gate.caila.io:443,5.gate.caila.io:443,6.gate.caila.io:443,7.gate.caila.io:443,8.gate.caila.io:443,9.gate.caila.io:443 \
+    MLP_GRPC_SECURE=true \
+    SERVICE_CONFIG={} \
+    MLP_STORAGE_TYPE=s3 \
+    MLP_S3_ENDPOINT=https://storage.caila.io \
+    MLP_S3_BUCKET=s3-bucket-1000147788-kasdnasdndas \
+    MLP_S3_ACCESS_KEY=s3-user-1000147788 \
+    MLP_S3_SECRET_KEY=kasdjadsndasndasn \
+    MLP_STORAGE_DIR= \
+    python3 src/main.py
+```
+    
 ______
 ## Создание сервиса в Caila.io
 1. Переходим в "Сервисы"
@@ -73,7 +193,7 @@ MLP_MODEL_ID=94602
 MLP_INSTANCE_ID=35369
 MLP_MODEL_NAME=detect-language
 HOSTNAME=$(hostname)
-MLP_SERVICE_TOKEN=1000147788.94602.Ifd0VEG5khQevl3ZMEyU14oEtkvOhabw1GIpXeiv
+MLP_SERVICE_TOKEN=1000147788.94602.IfasdasdasdqwesaddqweXeiv
 MLP_REST_URL=https://caila.io
 MLP_GRPC_HOST=gate.caila.io:443
 MLP_GRPC_HOSTS=0.gate.caila.io:443,1.gate.caila.io:443,2.gate.caila.io:443,3.gate.caila.io:443,4.gate.caila.io:443,5.gate.caila.io:443,6.gate.caila.io:443,7.gate.caila.io:443,8.gate.caila.io:443,9.gate.caila.io:443
@@ -81,9 +201,9 @@ MLP_GRPC_SECURE=true
 SERVICE_CONFIG={}
 MLP_STORAGE_TYPE=s3
 MLP_S3_ENDPOINT=https://storage.caila.io
-MLP_S3_BUCKET=s3-bucket-1000147788-4pkgynndrs
+MLP_S3_BUCKET=s3-bucket-1000147788-4pasdasdasdd
 MLP_S3_ACCESS_KEY=s3-user-1000147788
-MLP_S3_SECRET_KEY=2lpqqi3gluwe5ahzza6f
+MLP_S3_SECRET_KEY=2lpqasdasdhzza6f
 MLP_STORAGE_DIR=
 ```
  

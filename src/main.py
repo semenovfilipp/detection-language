@@ -9,8 +9,7 @@ Data Class который отвечает за запрос из Caila.io
 Наследуемся от BaseModel что бы сделать свой класс, который можно будет использовать в predict
 """
 class PredictRequest(BaseModel):
-    # alias нужен для того что бы можно было принимать из JSON "q", но работать с другим словом
-    query: str = Field(alias="q")
+    query: str
 
 
 # Data Class который отвечает за ответ от detectlanguage
