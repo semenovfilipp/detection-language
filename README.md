@@ -86,7 +86,7 @@ ____
 ```commandline
 https://github.com/detectlanguage/detectlanguage-python
 ```
-```
+
 
 3. Проверяем питон:
 
@@ -95,6 +95,7 @@ python3 --version
 ```
 
 4. Если версия 3.11 и выше, нужно поставить версию 3.10:
+
 ```commandline
 sudo apt update
    sudo apt install software-properties-common
